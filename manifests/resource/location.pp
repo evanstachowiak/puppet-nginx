@@ -97,9 +97,6 @@ define nginx::resource::location(
   if (($www_root == undef) and ($proxy == undef) and ($location_alias == undef) and ($stub_status == undef) ) {
     fail('Cannot create a location reference without a www_root, proxy, location_alias or stub_status defined')
   }
-  if (($www_root != undef) and ($proxy != undef)) {
-    fail('Cannot define both directory and proxy in a virtual host')
-  }
 
   ## Create stubs for vHost File Fragment Pattern
   if ($ssl_only != 'true') {
