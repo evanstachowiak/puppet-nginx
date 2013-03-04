@@ -10,9 +10,13 @@ server {
   ssl on;
   ssl_certificate      <%= ssl_cert %>;
   ssl_certificate_key  <%= ssl_key %>;
+  <% if @ssl_client_certificate %>ssl_client_certificate <%= @ssl_client_certificate %>;<% end %>
+  <% if @ssl_crl %>ssl_crl <%= @ssl_crl %>;<% end %>
+  <% if @ssl_session_cache %>ssl_session_cache <%= @ssl_session_cache %>;<% end %>
+  <% if @ssl_verify_client %>ssl_verify_client <%= @ssl_verify_client %>;<% end %>
 
-  ssl_session_timeout  5m;
+  ssl_session_timeout <%= @ssl_session_timeout %>;
 
   ssl_protocols  SSLv3 TLSv1;
-  ssl_ciphers  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv3:+EXP;
+  ssl_ciphers <%= @ssl_ciphers %>;
   ssl_prefer_server_ciphers   on;
