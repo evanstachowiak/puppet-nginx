@@ -11,6 +11,7 @@
 #   [*proxy*]                - Proxy server(s) for a location to connect to. Accepts a single value, can be used in conjunction
 #                              with nginx::resource::upstream
 #   [*proxy_read_timeout*]   - Override the default the proxy read timeout value of 90 seconds
+#   [*proxy_connect_timeout*]  - Override the default the proxy connect timeout value of 90 seconds
 #   [*ssl*]                  - Indicates whether to setup SSL bindings for this location.
 #   [*ssl_only*]	     - Required if the SSL and normal vHost have the same port.
 #   [*location_alias*]       - Path to be used as basis for serving requests for this location
@@ -48,20 +49,21 @@
 #  }
 
 define nginx::resource::location(
-  $ensure               = present,
-  $vhost                = undef,
-  $www_root             = undef,
-  $index_files          = ['index.html', 'index.htm', 'index.php'],
-  $proxy                = undef,
-  $proxy_read_timeout   = $nginx::params::nx_proxy_read_timeout,
-  $ssl                  = false,
-  $ssl_only		= false,
-  $location_alias       = undef,
-  $option               = undef,
-  $stub_status          = undef,
-  $location_cfg_prepend = undef,
-  $location_cfg_append  = undef,
-  $try_files            = undef,
+  $ensure                = present,
+  $vhost                 = undef,
+  $www_root              = undef,
+  $index_files           = ['index.html', 'index.htm', 'index.php'],
+  $proxy                 = undef,
+  $proxy_read_timeout    = $nginx::params::nx_proxy_read_timeout,
+  $proxy_connect_timeout = $nginx::params::nx_proxy_connect_timeout,
+  $ssl                   = false,
+  $ssl_only		           = false,
+  $location_alias        = undef,
+  $option                = undef,
+  $stub_status           = undef,
+  $location_cfg_prepend  = undef,
+  $location_cfg_append   = undef,
+  $try_files             = undef,
   $location
 ) {
   File {
