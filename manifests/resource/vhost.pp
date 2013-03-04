@@ -107,6 +107,13 @@ define nginx::resource::vhost(
     $ssl_only = 'true'
   }
 
+  # Support www_root in proxy
+  if ($proxy) and ($www_root) {
+    $real_www_root = undef
+  } else {
+    $real_www_root = $www_root
+  }
+
   # Create the default location reference for the vHost
   nginx::resource::location {"${name}-default":
     ensure               => $ensure,
