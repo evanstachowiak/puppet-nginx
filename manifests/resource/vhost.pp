@@ -116,16 +116,16 @@ define nginx::resource::vhost(
 
   # Create the default location reference for the vHost
   nginx::resource::location {"${name}-default":
-    ensure               => $ensure,
-    vhost                => $name,
-    ssl                  => $ssl,
-    ssl_only             => $ssl_only,
-    location             => '/',
-    proxy                => $proxy,
-    proxy_read_timeout   => $proxy_read_timeout,
-    try_files            => $try_files,
-    www_root             => $www_root,
-    notify               => Class['nginx::service'],
+    ensure             => $ensure,
+    vhost              => $name,
+    ssl                => $ssl,
+    ssl_only           => $ssl_only,
+    location           => '/',
+    proxy              => $proxy,
+    proxy_read_timeout => $proxy_read_timeout,
+    try_files          => $try_files,
+    www_root           => $real_www_root,
+    notify             => Class['nginx::service'],
   }
 
   # Support location_cfg_prepend and location_cfg_append on default location created by vhost
